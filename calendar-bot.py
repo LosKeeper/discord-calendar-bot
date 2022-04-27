@@ -36,16 +36,18 @@ async def _week(ctx: SlashContext):
     await ctx.send(embed=embed)
 
 
-@slash.slash(name='day', description='Affiche les événements de la date')
-async def _day(ctx: SlashContext, user_input: str = ""):
+@slash.slash(name='day', description='Print the day\'s events')
+async def _day(ctx: SlashContext, user_input: str = ''):
     try:
         str = datetime.strptime(str, '%Y-%m-%d')
     except ValueError:
-        await ctx.send("Date invalide")
+        await ctx.send("Invalide date")
         return
 
-    embed = discord.Embed(title="Cours de la date",
-                          description=day_events(str), color=0x00ff00)
+    delta = datetime.now()-str
+    print(delta.days)
+    embed = discord.Embed(title="Day lessons",
+                          description=day_events(delta.days), color=0x00ff00)
     await ctx.send(embed=embed)
 
 bot.run(token)
