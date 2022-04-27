@@ -17,21 +17,21 @@ async def on_ready():
 
 @slash.slash(name='today', description='Print today\'s events')
 async def _today(ctx: SlashContext):
-    embed = discord.Embed(title="Cours du jour",
+    embed = discord.Embed(title="Today lessons",
                           description=day_events(0), color=0x00ff00)
     await ctx.send(embed=embed)
 
 
 @slash.slash(name='tomorrow', description='Print tomorrow\'s events')
 async def _tomorrow(ctx: SlashContext):
-    embed = discord.Embed(title="Cours de demain",
+    embed = discord.Embed(title="Tomorrow lessons",
                           description=day_events(1), color=0x00ff00)
     await ctx.send(embed=embed)
 
 
 @slash.slash(name='week', description='Print the week\'s events')
 async def _week(ctx: SlashContext):
-    embed = discord.Embed(title="Cours de la semaine", description=day_events(
+    embed = discord.Embed(title="Week lessons", description=day_events(
         0)+day_events(1)+day_events(2)+day_events(3)+day_events(4)+day_events(5)+day_events(6)+day_events(7), color=0x00ff00)
     await ctx.send(embed=embed)
 
