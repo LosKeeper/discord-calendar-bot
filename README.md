@@ -22,7 +22,7 @@ The bot use the slash commands to interact with the user.
 | `/today`            | Show the events of today    |
 | `/tomorrow`         | Show the events of tomorrow |
 | `/week`             | Show the events of the week |
-| `/day <YYYY-MM-DD>` | Show the events of a day    |
+| `/day <YYYY-MM-DD>` (Not currently working) | Show the events of a day    |
 
 ## TODO
 - Create help command
