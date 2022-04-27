@@ -8,7 +8,7 @@ pip install -r requirements.txt
 
 
 ## Configuration
-To configure the bot, you need to modify the configuration file name `config.py`.
+To configure the bot, you need to create configuration file name `config.py`.
 ```python
 url = # URL of the calendar in ics format 
 token = # Token of the bot 
