@@ -1,53 +1,52 @@
-import discord
-from discord_slash import SlashCommand, SlashContext
-from discord.ext import commands
+import interactions
 from datetime import datetime
 
 from config import token
 from stylized_day_events import day_events
 
-bot = commands.Bot(command_prefix='!', intents=discord.Intents.all())
-slash = SlashCommand(bot, sync_commands=True)
+bot = interactions.Client(token=token)
 
 
-@bot.event
-async def on_ready():
-    print('Logged in as {0.user}'.format(bot))
+@bot.command(name='today', description='Print today\'s events')
+async def _today(ctx: interactions.CommandContext):
+    embed = interactions.Embed(title="Today lessons",
+                               description=day_events(0), color=0x00ff00)
+    await ctx.send(embeds=embed)
 
 
-@slash.slash(name='today', description='Print today\'s events')
-async def _today(ctx: SlashContext):
-    embed = discord.Embed(title="Today lessons",
-                          description=day_events(0), color=0x00ff00)
-    await ctx.send(embed=embed)
+@bot.command(name='tomorrow', description='Print tomorrow\'s events')
+async def _tomorrow(ctx: interactions.CommandContext):
+    embed = interactions.Embed(title="Tomorrow lessons",
+                               description=day_events(1), color=0x00ff00)
+    await ctx.send(embeds=embed)
 
 
-@slash.slash(name='tomorrow', description='Print tomorrow\'s events')
-async def _tomorrow(ctx: SlashContext):
-    embed = discord.Embed(title="Tomorrow lessons",
-                          description=day_events(1), color=0x00ff00)
-    await ctx.send(embed=embed)
-
-
-@slash.slash(name='week', description='Print the week\'s events')
-async def _week(ctx: SlashContext):
-    embed = discord.Embed(title="Week lessons", description=day_events(
+@bot.command(name='week', description='Print the week\'s events')
+async def _week(ctx: interactions.CommandContext):
+    embed = interactions.Embed(title="Week lessons", description=day_events(
         0)+day_events(1)+day_events(2)+day_events(3)+day_events(4)+day_events(5)+day_events(6)+day_events(7), color=0x00ff00)
-    await ctx.send(embed=embed)
+    await ctx.send(embeds=embed)
 
 
-@slash.slash(name='day', description='Print the day\'s events')
-async def _day(ctx: SlashContext, user_input: str = ''):
+@bot.command(name='day', description='Print the day\'s events',
+             options=[
+                 interactions.Option(
+                     name="date",
+                     description="The date of the day you want to see",
+                     type=interactions.OptionType.STRING,
+                     required=True,
+                 ),
+             ],)
+async def _day(ctx: interactions.CommandContext, date: str):
     try:
-        str = datetime.strptime(str, '%Y-%m-%d')
+        date = datetime.strptime(date, '%Y-%m-%d')
     except ValueError:
         await ctx.send("Invalide date")
         return
 
-    delta = datetime.now()-str
-    print(delta.days)
-    embed = discord.Embed(title="Day lessons",
-                          description=day_events(delta.days), color=0x00ff00)
-    await ctx.send(embed=embed)
+    delta = date - datetime.now()
+    embed = interactions.Embed(title="Day lessons",
+                               description=day_events(delta.days + 1), color=0x00ff00)
+    await ctx.send(embeds=embed)
 
-bot.run(token)
+bot.start()
