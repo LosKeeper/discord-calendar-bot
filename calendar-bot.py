@@ -1,7 +1,7 @@
 import interactions
 from datetime import datetime
 
-from config import token
+from config import token, CHANNEL_ID
 from stylized_day_events import day_events
 
 bot = interactions.Client(token=token)
@@ -23,8 +23,8 @@ async def _tomorrow(ctx: interactions.CommandContext):
 
 @bot.command(name='week', description='Print the week\'s events')
 async def _week(ctx: interactions.CommandContext):
-    embed = interactions.Embed(title="Week lessons", description=day_events(
-        0)+day_events(1)+day_events(2)+day_events(3)+day_events(4)+day_events(5)+day_events(6)+day_events(7), color=0x00ff00)
+    embed = interactions.Embed(title="Week lessons", description=day_events(0)+day_events(1)+day_events(
+        2)+day_events(3)+day_events(4)+day_events(5)+day_events(6)+day_events(7), color=0x00ff00)
     await ctx.send(embeds=embed)
 
 
@@ -32,7 +32,7 @@ async def _week(ctx: interactions.CommandContext):
              options=[
                  interactions.Option(
                      name="date",
-                     description="The date of the day you want to see",
+                     description="The date of the day you want to see (YYYY-MM-DD)",
                      type=interactions.OptionType.STRING,
                      required=True,
                  ),
@@ -48,5 +48,15 @@ async def _day(ctx: interactions.CommandContext, date: str):
     embed = interactions.Embed(title="Day lessons",
                                description=day_events(delta.days + 1), color=0x00ff00)
     await ctx.send(embeds=embed)
+
+
+@bot.event
+async def on_ready():
+    # Create a channel object
+    channel_request = interactions.api.http.channel.ChannelRequest()
+    channel = await channel_request.get_channel(CHANNEL_ID)
+    print(f"channel= {channel}")
+    await channel.send("Hello, I'm here !")
+
 
 bot.start()

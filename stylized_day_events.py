@@ -16,8 +16,8 @@ def day_events(days):
 
     for event in c.events:
         if event.begin.strftime('%Y-%m-%d') == datefor:
-            event.begin.hour = event.begin.hour + 2
-            event.end.hour = event.end.hour + 2
+            event.begin.hour = int(event.begin.hour) + 2
+            event.end.hour = int(event.end.hour) + 2
             if event.begin.hour < 10:
                 event.begin.hour = "0"+str(event.begin.hour)
             if event.begin.minute == 0:
