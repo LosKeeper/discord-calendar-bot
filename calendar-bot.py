@@ -50,13 +50,11 @@ async def _day(ctx: interactions.CommandContext, date: str):
     await ctx.send(embeds=embed)
 
 
-@bot.event
-async def on_ready():
-    # Create a channel object
-    channel_request = interactions.api.http.channel.ChannelRequest()
-    channel = await channel_request.get_channel(CHANNEL_ID)
-    print(f"channel= {channel}")
-    await channel.send("Hello, I'm here !")
+@create_task(OrTrigger(IntervalTrigger(3), IntervalTrigger(5)))
+async def my_task():
+    print("hi")
+
+my_task.start()
 
 
 bot.start()
