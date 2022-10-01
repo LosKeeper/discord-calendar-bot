@@ -14,10 +14,14 @@ def day_events(days):
 
     today_msg = "**__"+str(date.strftime('%A %d %B'))+"__**\n"
 
+    deltaHour = datetime.now().hour - datetime.utcnow().hour
+
+    print(deltaHour)
+
     for event in c.events:
         if event.begin.strftime('%Y-%m-%d') == datefor:
-            event.begin.hour = int(event.begin.hour) + 2
-            event.end.hour = int(event.end.hour) + 2
+            event.begin.hour = int(event.begin.hour) + deltaHour
+            event.end.hour = int(event.end.hour) + deltaHour
             if event.begin.hour < 10:
                 event.begin.hour = "0"+str(event.begin.hour)
             if event.begin.minute == 0:

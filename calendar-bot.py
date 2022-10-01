@@ -4,7 +4,8 @@ from datetime import datetime
 from config import token, CHANNEL_ID
 from stylized_day_events import day_events
 
-bot = interactions.Client(token=token)
+bot = interactions.Client(token=token,
+                          intents=interactions.Intents.ALL)
 
 
 @bot.command(name='today', description='Print today\'s events')
@@ -50,11 +51,10 @@ async def _day(ctx: interactions.CommandContext, date: str):
     await ctx.send(embeds=embed)
 
 
-@create_task(OrTrigger(IntervalTrigger(3), IntervalTrigger(5)))
-async def my_task():
-    print("hi")
-
-my_task.start()
-
+@bot.event
+async def on_ready():
+    channel = await bot._http.get_channel(CHANNEL_ID)
+    channel = interactions.Channel(**channel, _client=bot._http)
+    await channel.send("I'm ready !")
 
 bot.start()
