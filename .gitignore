@@ -1,3 +1,5 @@
 /.vscode
 config.py
 /__pycache__
+*.sh
+*.log
