@@ -36,4 +36,4 @@ The bot use the slash commands to interact with the user.
 
 ## TODO
 - [ ] Correct the command to show the events of the week
-- [ ] Create auto post every morning
+- [x] Create auto post every morning (use cron to restart the bot every day)
