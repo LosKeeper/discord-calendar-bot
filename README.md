@@ -10,21 +10,29 @@ pip install -r requirements.txt
 ## Configuration
 To configure the bot, you need to create configuration file name `config.py`.
 ```python
-url = # URL of the calendar in ics format 
-token = # Token of the bot 
+# URL of the calendar in ics format :
+url_1a = 
+url_2a_rio = 
+url_2a_sdia = 
+
+# Token of the bot :
+token = 
+
+# ID of the channel where the bot will send the messages :
+CHANNEL_ID_1A = 
+CHANNEL_ID_2A_RIO = 
+CHANNEL_ID_2A_SDIA = 
 ```
 
 ## Functions
 The bot use the slash commands to interact with the user.
-| Command             | Description                 |
-| :------------------ | :-------------------------- |
-| `/help`             | Show the help message       |
-| `/today`            | Show the events of today    |
-| `/tomorrow`         | Show the events of tomorrow |
-| `/week`             | Show the events of the week |
-| `/day <YYYY-MM-DD>` | Show the events of a day    |
+| Command                      | Description                                             |
+| :--------------------------- | :------------------------------------------------------ |
+| `/today <classe>`            | Show the events of today for the class mentioned        |
+| `/tomorrow <classe>`         | Show the events of tomorrow for the class mentioned     |
+| ~~`/week <classe>`~~         | ~~Show the events of the week for the class mentioned~~ |
+| `/day <YYYY-MM-DD> <classe>` | Show the events of a day for the class mentioned        |
 
 ## TODO
-- Create help command
-- Create multiple ICS gestion
-- Create auto post every morning
+- [ ] Correct the command to show the events of the week
+- [ ] Create auto post every morning

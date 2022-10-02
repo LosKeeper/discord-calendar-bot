@@ -1,22 +1,28 @@
 from datetime import datetime, timedelta
-from config import url
+from config import url_1a, url_2a_rio, url_2a_sdia
 from ics import Calendar
 import requests
 
-c = Calendar(requests.get(url).text)
 
+def day_events(days, classe):
 
-def day_events(days):
+    if classe == "1A":
+        url = url_1a
+    elif classe == "2ARIO":
+        url = url_2a_rio
+    elif classe == "2ASDIA":
+        url = url_2a_sdia
+
+    c = Calendar(requests.get(url).text)
+
     today_lst = []
 
     date = (datetime.now() + timedelta(days))
     datefor = "%s" % date.strftime('%Y-%m-%d')
 
-    today_msg = "**__"+str(date.strftime('%A %d %B'))+"__**\n"
+    today_msg = "**__"+str(date.strftime('%A %d %B'))+"("+classe+")"+"__**\n"
 
     deltaHour = datetime.now().hour - datetime.utcnow().hour
-
-    print(deltaHour)
 
     for event in c.events:
         if event.begin.strftime('%Y-%m-%d') == datefor:
