@@ -1,5 +1,6 @@
 # Discord Calendar Bot
 > The bot is currently in development.
+> THE BOT USE UTC TIMEZONE !!!
 
 > Many libraries are needed to make this bot work.
 ```pwsh

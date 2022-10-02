@@ -22,7 +22,8 @@ def day_events(days, classe):
 
     today_msg = "**__"+str(date.strftime('%A %d %B'))+"("+classe+")"+"__**\n"
 
-    deltaHour = datetime.now().hour - datetime.utcnow().hour
+    # Delta for UTC time
+    deltaHour = 2
 
     for event in c.events:
         if event.begin.strftime('%Y-%m-%d') == datefor:
