@@ -103,7 +103,7 @@ async def _day(ctx: interactions.CommandContext, date: str, classe: str):
 
 
 @ bot.event
-async def on_ready():
+async def on_start():
     # When bot is ready send time schedule in each 3 channels
     # 2ARIO
     channel = await bot._http.get_channel(CHANNEL_ID_2A_RIO)
