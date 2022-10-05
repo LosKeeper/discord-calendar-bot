@@ -108,7 +108,7 @@ async def on_start():
     # 2ARIO
     channel = await bot._http.get_channel(CHANNEL_ID_2A_RIO)
     channel = interactions.Channel(**channel, _client=bot._http)
-    embed = interactions.Embed(title="Tomorrow lessons",
+    embed = interactions.Embed(title="Next lessons",
                                description=day_events(1, "2ARIO"),
                                color=0x00ff00)
     embed.set_footer(text="By Thomas DUMOND",
@@ -118,7 +118,7 @@ async def on_start():
     # 2ASDIA
     channel = await bot._http.get_channel(CHANNEL_ID_2A_SDIA)
     channel = interactions.Channel(**channel, _client=bot._http)
-    embed = interactions.Embed(title="Tomorrow lessons",
+    embed = interactions.Embed(title="Next lessons",
                                description=day_events(1, "2ASDIA"),
                                color=0x00ff00)
     embed.set_footer(text="By Thomas DUMOND",
@@ -128,7 +128,7 @@ async def on_start():
     # 1A
     channel = await bot._http.get_channel(CHANNEL_ID_1A)
     channel = interactions.Channel(**channel, _client=bot._http)
-    embed = interactions.Embed(title="Tomorrow lessons",
+    embed = interactions.Embed(title="Next lessons",
                                description=day_events(1, "1A"),
                                color=0x00ff00)
     embed.set_footer(text="By Thomas DUMOND",

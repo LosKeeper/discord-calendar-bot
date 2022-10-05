@@ -36,7 +36,7 @@ def day_events(days, classe):
             if event.end.minute == 0:
                 event.end.minute = "00"
             today_lst.append("```fix\n"+str(event.begin.hour)+":"+str(event.begin.minute) + " - "+str(
-                event.end.hour)+":"+str(event.end.minute)+" - " + event.name.encode("latin-1").decode("utf-8")+"\n```")
+                event.end.hour)+":"+str(event.end.minute)+" - " + event.name.encode("latin-1").decode("utf-8")+" -> "+event.location.encode("latin-1").decode("utf-8").split("(")[0]+"\n```")
 
     today_lst.sort()
     if today_lst == []:

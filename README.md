@@ -39,4 +39,4 @@ In adition, the bot send a message at startup in the channels for each class con
 ## TODO
 - [ ] Correct the command to show the events of the week
 - [ ] Create auto post every morning using something else than restart the bot with cron
-- [ ] Add room to the events
+- [x] Add room to the events
