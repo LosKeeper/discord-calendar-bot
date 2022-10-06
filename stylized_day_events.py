@@ -29,20 +29,20 @@ def day_events(days, classe):
 
     for event in c.events:
         if event.begin.strftime('%Y-%m-%d') == datefor:
-            event.begin.hour = int(event.begin.hour) + deltaHour
-            event.end.hour = int(event.end.hour) + deltaHour
-            if event.begin.hour < 10:
-                event.begin.hour = "0"+str(event.begin.hour)
+            tmp_begin_hour = (int(event.begin.hour) + int(deltaHour))
+            tmp_end_hour = (int(event.end.hour) + int(deltaHour))
+            if tmp_begin_hour < 10:
+                tmp_begin_hour = "0"+str(tmp_begin_hour)
             if event.begin.minute == 0:
                 event.begin.minute = "00"
             if event.end.minute == 0:
                 event.end.minute = "00"
             if event.location == None:
-                today_lst.append("```fix\n"+str(event.begin.hour)+":"+str(event.begin.minute) + " - "+str(
-                    event.end.hour)+":"+str(event.end.minute)+" - " + event.name.encode("latin-1").decode("utf-8")+"\n```")
+                today_lst.append("```fix\n"+str(tmp_begin_hour)+":"+str(event.begin.minute) + " - "+str(
+                    tmp_end_hour)+":"+str(event.end.minute)+" - " + event.name.encode("latin-1").decode("utf-8")+"\n```")
             else:
-                today_lst.append("```fix\n"+str(event.begin.hour)+":"+str(event.begin.minute) + " - "+str(
-                    event.end.hour)+":"+str(event.end.minute)+" - " + event.name.encode("latin-1").decode("utf-8")+" -> "+event.location.encode("latin-1").decode("utf-8").split("(")[0]+"\n```")
+                today_lst.append("```fix\n"+str(tmp_begin_hour)+":"+str(event.begin.minute) + " - "+str(
+                    tmp_end_hour)+":"+str(event.end.minute)+" - " + event.name.encode("latin-1").decode("utf-8")+" -> "+event.location.encode("latin-1").decode("utf-8").split("(")[0]+"\n```")
 
     today_lst.sort()
     if today_lst == []:
