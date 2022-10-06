@@ -41,3 +41,4 @@ In adition, the bot send a message at startup in the channels for each class con
 - [ ] Create auto post every morning using something else than restart the bot with cron
 - [x] Add room to the events
 - [ ] Correct timezone
+- [ ] Delete previous msg before post new startup messages
