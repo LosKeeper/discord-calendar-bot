@@ -47,26 +47,26 @@ async def _tomorrow(ctx: interactions.CommandContext, classe: str):
     await ctx.send(embeds=embed)
 
 
-# @ bot.command(name='week', description='Print the week\'s events',
-#               options=[
-#                   interactions.Option(
-#                       name="classe",
-#                       description="The class you want to see (1A or 2ARIO or 2ASDIA)",
-#                       type=interactions.OptionType.STRING,
-#                       choice=["1A", "2ARIO", "2ASDIA"],
-#                       required=True,
-#                   )])
-# async def _week(ctx: interactions.CommandContext, classe: str):
-#     if classe not in ["1A", "2ARIO", "2ASDIA"]:
-#         await ctx.send(content="The class you entered is not valid")
-#         return
-#     buff = day_events(0, classe)+day_events(1, classe)+day_events(
-#         2, classe)+day_events(3, classe)+day_events(4, classe)+day_events(5, classe)+day_events(6, classe)+day_events(7, classe)
-#     embed = interactions.Embed(
-#         title="Week lessons", description=buff, color=0x00ff00)
-#     embed.set_footer(text="By Thomas DUMOND",
-#                      icon_url="https://avatars.githubusercontent.com/u/28956167?s=400&u=195ab629066c0d1f29d6917d6479e59861349b2d&v=4")
-#     await ctx.send(embeds=embed)
+@ bot.command(name='week', description='Print the week\'s events',
+              options=[
+                  interactions.Option(
+                      name="classe",
+                      description="The class you want to see (1A or 2ARIO or 2ASDIA)",
+                      type=interactions.OptionType.STRING,
+                      choice=["1A", "2ARIO", "2ASDIA"],
+                      required=True,
+                  )])
+async def _week(ctx: interactions.CommandContext, classe: str):
+    if classe not in ["1A", "2ARIO", "2ASDIA"]:
+        await ctx.send(content="The class you entered is not valid")
+        return
+    buff = day_events(0, classe)+day_events(1, classe)+day_events(
+        2, classe)+day_events(3, classe)+day_events(4, classe)+day_events(5, classe)+day_events(6, classe)+day_events(7, classe)
+    embed = interactions.Embed(
+        title="Week lessons", description=buff, color=0x00ff00)
+    embed.set_footer(text="By Thomas DUMOND",
+                     icon_url="https://avatars.githubusercontent.com/u/28956167?s=400&u=195ab629066c0d1f29d6917d6479e59861349b2d&v=4")
+    await ctx.send(embeds=embed)
 
 
 @bot.command(name='day', description='Print the day\'s events',

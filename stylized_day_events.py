@@ -3,17 +3,19 @@ from config import url_1a, url_2a_rio, url_2a_sdia
 from ics import Calendar
 import requests
 
+c1 = Calendar(requests.get(url_1a).text)
+c2 = Calendar(requests.get(url_2a_rio).text)
+c3 = Calendar(requests.get(url_2a_sdia).text)
+
 
 def day_events(days, classe):
 
     if classe == "1A":
-        url = url_1a
+        c = c1
     elif classe == "2ARIO":
-        url = url_2a_rio
+        c = c2
     elif classe == "2ASDIA":
-        url = url_2a_sdia
-
-    c = Calendar(requests.get(url).text)
+        c = c3
 
     today_lst = []
 
