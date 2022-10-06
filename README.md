@@ -27,12 +27,12 @@ CHANNEL_ID_2A_SDIA =
 
 ## Functions
 The bot use the slash commands to interact with the user.
-| Command                      | Description                                             |
-| :--------------------------- | :------------------------------------------------------ |
-| `/today <classe>`            | Show the events of today for the class mentioned        |
-| `/tomorrow <classe>`         | Show the events of tomorrow for the class mentioned     |
-| ~~`/week <classe>`~~         | ~~Show the events of the week for the class mentioned~~ |
-| `/day <YYYY-MM-DD> <classe>` | Show the events of a day for the class mentioned        |
+| Command                      | Description                                         |
+| :--------------------------- | :-------------------------------------------------- |
+| `/today <classe>`            | Show the events of today for the class mentioned    |
+| `/tomorrow <classe>`         | Show the events of tomorrow for the class mentioned |
+| `/week <classe>`             | Show the events of the week for the class mentioned |
+| `/day <YYYY-MM-DD> <classe>` | Show the events of a day for the class mentioned    |
 
 In adition, the bot send a message at startup in the channels for each class concerning the events of the next day.
 
