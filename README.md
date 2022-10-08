@@ -38,6 +38,7 @@ In adition, the bot send a message at startup in the channels for each class con
 
 ## TODO
 - [x] Correct the command to show the events of the week
+- [x] Delete old messages in the channels
 - [ ] Create auto post every morning using something else than restart the bot with cron
 - [x] Add room to the events
 - [ ] Correct timezone
