@@ -24,8 +24,8 @@ def day_events(days, classe):
 
     today_msg = "**__"+str(date.strftime('%A %d %B'))+"("+classe+")"+"__**\n"
 
-    # Delta for UTC time
-    deltaHour = 2
+    # Delta for UTC time for France during winter
+    deltaHour = 1
 
     for event in c.events:
         if event.begin.strftime('%Y-%m-%d') == datefor:
