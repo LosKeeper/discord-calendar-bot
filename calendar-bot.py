@@ -8,6 +8,11 @@ bot = interactions.Client(token=token,
                           intents=interactions.Intents.ALL)
 
 
+@bot.command(name="calendar", description="Get help with the calendar bot")
+async def _help(ctx: interactions.CommandContext):
+    await ctx.send("The commands are: \n```\n\t/calendar : to get help msg\n\t/today <1A|2ASDIA|2ARIO> : to get the day's events\n\t/tomorrow <1A|2ASDIA|2ARIO> : to get the day's events\n\t/week <1A|2ASDIA|2ARIO> : to get the week's events.```")
+
+
 @bot.command(name='today', description='Print today\'s events',
              options=[interactions.Option(
                  name="classe",
@@ -104,6 +109,15 @@ async def _day(ctx: interactions.CommandContext, date: str, classe: str):
 
 @ bot.event
 async def on_start():
+    # Add status to the bot
+    await bot.change_presence(interactions.ClientPresence(
+        status=interactions.StatusType.ONLINE,
+        activities=[
+            interactions.PresenceActivity(
+                name="/calendar", type=interactions.PresenceActivityType.GAME)
+        ]
+    ))
+
     # When bot is ready send time schedule in each 3 channels
     # 2ARIO
     channel = await bot._http.get_channel(CHANNEL_ID_2A_RIO)
