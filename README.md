@@ -41,5 +41,5 @@ In adition, the bot send a message at startup in the channels for each class con
 - [x] Delete old messages in the channels
 - [ ] Create auto post every morning using something else than restart the bot with cron
 - [x] Add room to the events
-- [ ] Correct timezone
-- [ ] Delete previous msg before post new startup messages
+- [x] Correct timezone
+- [x] Delete previous msg before post new startup messages

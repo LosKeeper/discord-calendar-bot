@@ -1,4 +1,6 @@
+import pytz
 from datetime import datetime, timedelta
+
 from config import url_1a, url_2a_rio, url_2a_sdia
 from ics import Calendar
 import requests
@@ -19,18 +21,15 @@ def day_events(days, classe):
 
     today_lst = []
 
-    date = (datetime.now() + timedelta(days))
+    date = datetime.now(pytz.timezone('Europe/Paris')) + timedelta(days=days)
     datefor = "%s" % date.strftime('%Y-%m-%d')
 
     today_msg = "**__"+str(date.strftime('%A %d %B'))+"("+classe+")"+"__**\n"
 
-    # Delta for UTC time for France during winter
-    deltaHour = 1
-
     for event in c.events:
         if event.begin.strftime('%Y-%m-%d') == datefor:
-            tmp_begin_hour = (int(event.begin.hour) + int(deltaHour))
-            tmp_end_hour = (int(event.end.hour) + int(deltaHour))
+            tmp_begin_hour = (int(event.begin.hour))
+            tmp_end_hour = (int(event.end.hour))
             if tmp_begin_hour < 10:
                 tmp_begin_hour = "0"+str(tmp_begin_hour)
             if event.begin.minute == 0:
