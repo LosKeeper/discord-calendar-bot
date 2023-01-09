@@ -21,15 +21,20 @@ def day_events(days, classe):
 
     today_lst = []
 
-    date = datetime.now(pytz.timezone('Europe/Paris')) + timedelta(days=days)
+    # USE FOR TIMEZONE IN WINTER
+    deltatime = 1
+
+    date = datetime.now(pytz.timezone('Europe/Paris'))
+    date = date + timedelta(days=days)
     datefor = "%s" % date.strftime('%Y-%m-%d')
 
     today_msg = "**__"+str(date.strftime('%A %d %B'))+"("+classe+")"+"__**\n"
 
     for event in c.events:
         if event.begin.strftime('%Y-%m-%d') == datefor:
-            tmp_begin_hour = (int(event.begin.hour))
-            tmp_end_hour = (int(event.end.hour))
+            tmp_begin_hour = (int(event.begin.hour) + deltatime)
+            print(tmp_begin_hour)
+            tmp_end_hour = (int(event.end.hour) + deltatime)
             if tmp_begin_hour < 10:
                 tmp_begin_hour = "0"+str(tmp_begin_hour)
             if event.begin.minute == 0:
