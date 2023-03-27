@@ -22,7 +22,7 @@ def day_events(days, classe):
     today_lst = []
 
     # USE FOR TIMEZONE IN WINTER
-    deltatime = 1
+    deltatime = 2
 
     date = datetime.now(pytz.timezone('Europe/Paris'))
     date = date + timedelta(days=days)
