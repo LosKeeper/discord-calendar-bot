@@ -132,8 +132,8 @@ async def on_start(event: interactions.api.events.Startup):
 
     # When bot is ready send time schedule in each 3 channels
     # 2ARIO
-    channel = await interactions.IDConverter(CHANNEL_ID_1A).convert(bot)
-    await channel.purge(amount=10)
+    channel = await bot.fetch_channel(CHANNEL_ID_2A_RIO)
+    await channel.purge(deletion_limit=10)
     embed = interactions.Embed(title="Next lessons",
                                description=day_events(1, "2ARIO"),
                                color=0x00ff00)
@@ -141,27 +141,25 @@ async def on_start(event: interactions.api.events.Startup):
                      icon_url="https://avatars.githubusercontent.com/u/28956167?s=400&u=195ab629066c0d1f29d6917d6479e59861349b2d&v=4")
     await channel.send(embeds=embed)
 
-    # # 2ASDIA
-    # channel = await bot._http.get_channel(CHANNEL_ID_2A_SDIA)
-    # channel = interactions.Channel(**channel, _client=bot._http)
-    # await channel.purge(amount=10)
-    # embed = interactions.Embed(title="Next lessons",
-    #                            description=day_events(1, "2ASDIA"),
-    #                            color=0x00ff00)
-    # embed.set_footer(text="By Thomas DUMOND",
-    #                  icon_url="https://avatars.githubusercontent.com/u/28956167?s=400&u=195ab629066c0d1f29d6917d6479e59861349b2d&v=4")
-    # await channel.send(embeds=embed)
+    # 2ASDIA
+    channel = await bot.fetch_channel(CHANNEL_ID_2A_SDIA)
+    await channel.purge(deletion_limit=10)
+    embed = interactions.Embed(title="Next lessons",
+                               description=day_events(1, "2ASDIA"),
+                               color=0x00ff00)
+    embed.set_footer(text="By Thomas DUMOND",
+                     icon_url="https://avatars.githubusercontent.com/u/28956167?s=400&u=195ab629066c0d1f29d6917d6479e59861349b2d&v=4")
+    await channel.send(embeds=embed)
 
-    # # 1A
-    # channel = await bot._http.get_channel(CHANNEL_ID_1A)
-    # channel = interactions.Channel(**channel, _client=bot._http)
-    # await channel.purge(amount=10)
-    # embed = interactions.Embed(title="Next lessons",
-    #                            description=day_events(1, "1A"),
-    #                            color=0x00ff00)
-    # embed.set_footer(text="By Thomas DUMOND",
-    #                  icon_url="https://avatars.githubusercontent.com/u/28956167?s=400&u=195ab629066c0d1f29d6917d6479e59861349b2d&v=4")
-    # await channel.send(embeds=embed)
+    # 1A
+    channel = await bot.fetch_channel(CHANNEL_ID_1A)
+    await channel.purge(deletion_limit=10)
+    embed = interactions.Embed(title="Next lessons",
+                               description=day_events(1, "1A"),
+                               color=0x00ff00)
+    embed.set_footer(text="By Thomas DUMOND",
+                     icon_url="https://avatars.githubusercontent.com/u/28956167?s=400&u=195ab629066c0d1f29d6917d6479e59861349b2d&v=4")
+    await channel.send(embeds=embed)
 
 
 bot.start()
