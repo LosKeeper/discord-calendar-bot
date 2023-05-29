@@ -8,20 +8,24 @@ bot = interactions.Client(token=token,
                           intents=interactions.Intents.ALL)
 
 
-@bot.command(name="calendar", description="Get help with the calendar bot")
-async def _help(ctx: interactions.CommandContext):
+@interactions.slash_command(name="calendar", description="Get help with the calendar bot")
+async def _help(ctx: interactions.SlashContext):
     await ctx.send("The commands are: \n```\n\t/calendar : to get help msg\n\t/today <1A|2ASDIA|2ARIO> : to get the day's events\n\t/tomorrow <1A|2ASDIA|2ARIO> : to get the day's events\n\t/week <1A|2ASDIA|2ARIO> : to get the week's events.```")
 
 
-@bot.command(name='today', description='Print today\'s events',
-             options=[interactions.Option(
-                 name="classe",
-                 description="The class you want to see (1A or 2ARIO or 2ASDIA)",
-                 type=interactions.OptionType.STRING,
-                 choice=["1A", "2ARIO", "2ASDIA"],
-                 required=True,
-             )])
-async def _today(ctx: interactions.CommandContext, classe: str):
+@interactions.slash_command(name='today', description='Print today\'s events')
+@interactions.slash_option(
+    name="classe",
+    description="The class you want to see (1A or 2ARIO or 2ASDIA)",
+    opt_type=interactions.OptionType.STRING,
+    choices=[
+        interactions.SlashCommandChoice(name="1A", value="1A"),
+        interactions.SlashCommandChoice(name="2ARIO", value="2ARIO"),
+        interactions.SlashCommandChoice(name="2ASDIA", value="2ASDIA")
+    ],
+    required=True
+)
+async def _today(ctx: interactions.SlashContext, classe: str):
     if classe not in ["1A", "2ARIO", "2ASDIA"]:
         await ctx.send(content="The class you entered is not valid")
         return
@@ -32,15 +36,19 @@ async def _today(ctx: interactions.CommandContext, classe: str):
     await ctx.send(embeds=embed)
 
 
-@bot.command(name='tomorrow', description='Print tomorrow\'s events',
-             options=[interactions.Option(
-                 name="classe",
-                 description="The class you want to see (1A or 2ARIO or 2ASDIA)",
-                 type=interactions.OptionType.STRING,
-                 choice=["1A", "2ARIO", "2ASDIA"],
-                 required=True,
-             )])
-async def _tomorrow(ctx: interactions.CommandContext, classe: str):
+@interactions.slash_command(name='tomorrow', description='Print tomorrow\'s events')
+@interactions.slash_option(
+    name="classe",
+    description="The class you want to see (1A or 2ARIO or 2ASDIA)",
+    opt_type=interactions.OptionType.STRING,
+    choices=[
+        interactions.SlashCommandChoice(name="1A", value="1A"),
+        interactions.SlashCommandChoice(name="2ARIO", value="2ARIO"),
+        interactions.SlashCommandChoice(name="2ASDIA", value="2ASDIA")
+    ],
+    required=True
+)
+async def _tomorrow(ctx: interactions.SlashContext, classe: str):
     if classe not in ["1A", "2ARIO", "2ASDIA"]:
         await ctx.send(content="The class you entered is not valid")
         return
@@ -52,16 +60,19 @@ async def _tomorrow(ctx: interactions.CommandContext, classe: str):
     await ctx.send(embeds=embed)
 
 
-@ bot.command(name='week', description='Print the week\'s events',
-              options=[
-                  interactions.Option(
-                      name="classe",
-                      description="The class you want to see (1A or 2ARIO or 2ASDIA)",
-                      type=interactions.OptionType.STRING,
-                      choice=["1A", "2ARIO", "2ASDIA"],
-                      required=True,
-                  )])
-async def _week(ctx: interactions.CommandContext, classe: str):
+@interactions.slash_command(name='week', description='Print the week\'s events')
+@interactions.slash_option(
+    name="classe",
+    description="The class you want to see (1A or 2ARIO or 2ASDIA)",
+    opt_type=interactions.OptionType.STRING,
+    choices=[
+        interactions.SlashCommandChoice(name="1A", value="1A"),
+        interactions.SlashCommandChoice(name="2ARIO", value="2ARIO"),
+        interactions.SlashCommandChoice(name="2ASDIA", value="2ASDIA")
+    ],
+    required=True
+)
+async def _week(ctx: interactions.SlashContext, classe: str):
     if classe not in ["1A", "2ARIO", "2ASDIA"]:
         await ctx.send(content="The class you entered is not valid")
         return
@@ -74,21 +85,25 @@ async def _week(ctx: interactions.CommandContext, classe: str):
     await ctx.send(embeds=embed)
 
 
-@bot.command(name='day', description='Print the day\'s events',
-             options=[
-                  interactions.Option(
-                      name="date",
-                      description="The date of the day you want to see (YYYY-MM-DD)",
-                      type=interactions.OptionType.STRING,
-                      required=True,
-                  ), interactions.Option(
-                      name="classe",
-                      description="The class you want to see (1A or 2ARIO or 2ASDIA)",
-                      type=interactions.OptionType.STRING,
-                      required=True,
-                  )
-             ],)
-async def _day(ctx: interactions.CommandContext, date: str, classe: str):
+@interactions.slash_command(name='day', description='Print the day\'s events')
+@interactions.slash_option(
+    name="date",
+    description="The date of the day you want to see (YYYY-MM-DD)",
+    opt_type=interactions.OptionType.STRING,
+    required=True
+)
+@interactions.slash_option(
+    name="classe",
+    description="The class you want to see (1A or 2ARIO or 2ASDIA)",
+    opt_type=interactions.OptionType.STRING,
+    choices=[
+        interactions.SlashCommandChoice(name="1A", value="1A"),
+        interactions.SlashCommandChoice(name="2ARIO", value="2ARIO"),
+        interactions.SlashCommandChoice(name="2ASDIA", value="2ASDIA")
+    ],
+    required=True
+)
+async def _day(ctx: interactions.SlashContext, date: str, classe: str):
     if classe not in ["1A", "2ARIO", "2ASDIA"]:
         await ctx.send(content="The class you entered is not valid")
         return
@@ -107,22 +122,18 @@ async def _day(ctx: interactions.CommandContext, date: str, classe: str):
     await ctx.send(embeds=embed)
 
 
-@ bot.event
-async def on_start():
+@interactions.listen()
+async def on_start(event: interactions.api.events.Startup):
     # Add status to the bot
-    await bot.change_presence(interactions.ClientPresence(
-        status=interactions.StatusType.ONLINE,
-        activities=[
-            interactions.PresenceActivity(
-                name="/calendar", type=interactions.PresenceActivityType.GAME)
-        ]
-    ))
+    await bot.change_presence(
+        activity=interactions.Activity(
+            name="/calendar", type=interactions.ActivityType.PLAYING)
+    )
 
     # When bot is ready send time schedule in each 3 channels
     # 2ARIO
-    channel = await bot._http.get_channel(CHANNEL_ID_2A_RIO)
-    channel = interactions.Channel(**channel, _client=bot._http)
-    await channel.purge(amount=10)
+    channel = await bot.fetch_channel(CHANNEL_ID_2A_RIO)
+    await channel.purge(deletion_limit=10)
     embed = interactions.Embed(title="Next lessons",
                                description=day_events(1, "2ARIO"),
                                color=0x00ff00)
@@ -131,9 +142,8 @@ async def on_start():
     await channel.send(embeds=embed)
 
     # 2ASDIA
-    channel = await bot._http.get_channel(CHANNEL_ID_2A_SDIA)
-    channel = interactions.Channel(**channel, _client=bot._http)
-    await channel.purge(amount=10)
+    channel = await bot.fetch_channel(CHANNEL_ID_2A_SDIA)
+    await channel.purge(deletion_limit=10)
     embed = interactions.Embed(title="Next lessons",
                                description=day_events(1, "2ASDIA"),
                                color=0x00ff00)
@@ -142,9 +152,8 @@ async def on_start():
     await channel.send(embeds=embed)
 
     # 1A
-    channel = await bot._http.get_channel(CHANNEL_ID_1A)
-    channel = interactions.Channel(**channel, _client=bot._http)
-    await channel.purge(amount=10)
+    channel = await bot.fetch_channel(CHANNEL_ID_1A)
+    await channel.purge(deletion_limit=10)
     embed = interactions.Embed(title="Next lessons",
                                description=day_events(1, "1A"),
                                color=0x00ff00)

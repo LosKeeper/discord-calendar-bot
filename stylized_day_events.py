@@ -11,7 +11,9 @@ c3 = Calendar(requests.get(url_2a_sdia).text)
 
 
 def day_events(days, classe):
-
+    """
+    Return the events of the day in a list
+    """
     if classe == "1A":
         c = c1
     elif classe == "2ARIO":
@@ -33,7 +35,6 @@ def day_events(days, classe):
     for event in c.events:
         if event.begin.strftime('%Y-%m-%d') == datefor:
             tmp_begin_hour = (int(event.begin.hour) + deltatime)
-            print(tmp_begin_hour)
             tmp_end_hour = (int(event.end.hour) + deltatime)
             if tmp_begin_hour < 10:
                 tmp_begin_hour = "0"+str(tmp_begin_hour)
