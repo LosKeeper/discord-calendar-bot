@@ -1,13 +1,17 @@
-import pytz
-from datetime import datetime, timedelta
 
-from config import url_1a, url_2a_rio, url_2a_sdia
+from datetime import datetime, timedelta
+from dateutil import tz
+
+from dotenv import load_dotenv
+from os import environ as env
+
 from ics import Calendar
 import requests
 
-c1 = Calendar(requests.get(url_1a).text)
-c2 = Calendar(requests.get(url_2a_rio).text)
-c3 = Calendar(requests.get(url_2a_sdia).text)
+load_dotenv()
+c1 = Calendar(requests.get(env["URL_1A"]).text)
+c2 = Calendar(requests.get(env["URL_2A_RIO"]).text)
+c3 = Calendar(requests.get(env["URL_2A_SDIA"]).text)
 
 
 def day_events(days, classe):
@@ -23,10 +27,8 @@ def day_events(days, classe):
 
     today_lst = []
 
-    # USE FOR TIMEZONE IN WINTER
-    deltatime = 2
+    date = datetime.now()
 
-    date = datetime.now(pytz.timezone('Europe/Paris'))
     date = date + timedelta(days=days)
     datefor = "%s" % date.strftime('%Y-%m-%d')
 
@@ -34,8 +36,11 @@ def day_events(days, classe):
 
     for event in c.events:
         if event.begin.strftime('%Y-%m-%d') == datefor:
-            tmp_begin_hour = (int(event.begin.hour) + deltatime)
-            tmp_end_hour = (int(event.end.hour) + deltatime)
+            event.begin = event.begin.astimezone(tz.tzlocal())
+            event.end = event.end.astimezone(tz.tzlocal())
+
+            tmp_begin_hour = (int(event.begin.hour))
+            tmp_end_hour = (int(event.end.hour))
             if tmp_begin_hour < 10:
                 tmp_begin_hour = "0"+str(tmp_begin_hour)
             if event.begin.minute == 0:

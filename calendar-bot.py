@@ -1,10 +1,14 @@
 import interactions
 from datetime import datetime
 
-from config import *
+from dotenv import load_dotenv
+from os import environ as env
+
 from stylized_day_events import day_events
 
-bot = interactions.Client(token=token,
+load_dotenv()
+
+bot = interactions.Client(token=env["TOKEN"],
                           intents=interactions.Intents.ALL)
 
 
@@ -132,7 +136,7 @@ async def on_start(event: interactions.api.events.Startup):
 
     # When bot is ready send time schedule in each 3 channels
     # 2ARIO
-    channel = await bot.fetch_channel(CHANNEL_ID_2A_RIO)
+    channel = await bot.fetch_channel(env["CHANNEL_ID_2A_RIO"])
     await channel.purge(deletion_limit=10)
     embed = interactions.Embed(title="Next lessons",
                                description=day_events(1, "2ARIO"),
@@ -142,7 +146,7 @@ async def on_start(event: interactions.api.events.Startup):
     await channel.send(embeds=embed)
 
     # 2ASDIA
-    channel = await bot.fetch_channel(CHANNEL_ID_2A_SDIA)
+    channel = await bot.fetch_channel(env["CHANNEL_ID_2A_SDIA"])
     await channel.purge(deletion_limit=10)
     embed = interactions.Embed(title="Next lessons",
                                description=day_events(1, "2ASDIA"),
@@ -152,7 +156,7 @@ async def on_start(event: interactions.api.events.Startup):
     await channel.send(embeds=embed)
 
     # 1A
-    channel = await bot.fetch_channel(CHANNEL_ID_1A)
+    channel = await bot.fetch_channel(env["CHANNEL_ID_1A"])
     await channel.purge(deletion_limit=10)
     embed = interactions.Embed(title="Next lessons",
                                description=day_events(1, "1A"),
