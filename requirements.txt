@@ -2,4 +2,4 @@ discord-py-interactions
 datetime
 ics
 requests
-pytz
+python-dotenv

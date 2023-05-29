@@ -23,20 +23,20 @@ Many libraries are needed to make this bot work :
 ```bash
 pip install -r requirements.txt
 ```
-To configure the bot, you need to create configuration file name `config.py` : 
-```python
+To configure the bot, you need to create configuration file name `.env` (you can use the `.env.example` file as a template) :
+```ini
 # URL of the calendar in ics format :
-url_1a = ""
-url_2a_rio = ""
-url_2a_sdia = ""
+URL_1A=""
+URL_2A_RIO=""
+URL_2A_SDIA=""
 
 # Token of the bot :
-token = ""
+TOKEN=""
 
 # ID of the channel where the bot will send the messages :
-CHANNEL_ID_1A = ""
-CHANNEL_ID_2A_RIO = ""
-CHANNEL_ID_2A_SDIA = ""
+CHANNEL_ID_1A=""
+CHANNEL_ID_2A_RIO=""
+CHANNEL_ID_2A_SDIA=""
 ```
 
 ## 🚀 Launch
@@ -58,6 +58,3 @@ In adition, the bot send a message at startup in the channels for each class con
 
 ## 🐞 Bugs and TODO
 - [ ] Create auto post every morning using something else than restart the bot with cron
-- [x] Migration to interactions.py v5
-- [ ] Use time from the computer instead of UTC time
-- [ ] Use .env file for token and channel id instead of config.py
