@@ -1,5 +1,5 @@
 # <img src="assets/icon.png" alt="icon" width="4%"/> Discord Calendar Bot
-[![Github Version](https://img.shields.io/badge/version-v1.2.0-green)](https://github.com/LosKeeper/discord-calendar-bot)
+[![Github Version](https://img.shields.io/github/v/release/loskeeper/discord-calendar-bot)](https://github.com/LosKeeper/discord-calendar-bot)
 [![Github License](https://img.shields.io/github/license/loskeeper/discord-calendar-bot)](https://github.com/LosKeeper/discord-calendar-bot/blob/main/LICENSE)
 [![Github Last Commit](https://img.shields.io/github/last-commit/loskeeper/discord-calendar-bot)](https://github.com/LosKeeper/discord-calendar-bot/commits)
 [![Github Issues](https://img.shields.io/github/issues/loskeeper/discord-calendar-bot)](https://github.com/LosKeeper/discord-calendar-bot/issues)
