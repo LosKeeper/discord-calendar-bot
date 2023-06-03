@@ -126,15 +126,8 @@ async def _day(ctx: interactions.SlashContext, date: str, classe: str):
     await ctx.send(embeds=embed)
 
 
-@interactions.listen()
-async def on_start(event: interactions.api.events.Startup):
-    # Add status to the bot
-    await bot.change_presence(
-        activity=interactions.Activity(
-            name="/calendar", type=interactions.ActivityType.PLAYING)
-    )
-
-    # When bot is ready send time schedule in each 3 channels
+@interactions.Task.create(interactions.TimeTrigger(hour=int(env["HOUR"]), minute=int(env["MINUTE"]), utc=False))
+async def _daily_calendar():
     # 2ARIO
     channel = await bot.fetch_channel(env["CHANNEL_ID_2A_RIO"])
     await channel.purge(deletion_limit=10)
@@ -164,6 +157,18 @@ async def on_start(event: interactions.api.events.Startup):
     embed.set_footer(text="By Thomas DUMOND",
                      icon_url="https://avatars.githubusercontent.com/u/28956167?s=400&u=195ab629066c0d1f29d6917d6479e59861349b2d&v=4")
     await channel.send(embeds=embed)
+
+@interactions.listen()
+async def on_start(event: interactions.api.events.Startup):
+    # Add status to the bot
+    await bot.change_presence(
+        activity=interactions.Activity(
+            name="/calendar", type=interactions.ActivityType.PLAYING)
+    )
+    
+    # Start the daily calendar task
+    _daily_calendar.start()
+
 
 
 bot.start()
