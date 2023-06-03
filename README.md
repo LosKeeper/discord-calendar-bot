@@ -8,7 +8,7 @@
 [![Interactions.py Version](https://img.shields.io/badge/interactions.py-v5-green)](https://github.com/interactions-py/interactions.py)
 
 [![Author](https://img.shields.io/badge/author-@LosKeeper-blue)](https://github.com/LosKeeper)
-> This bot is used to display the events of the day, the next day or the week for a class. It can also display the events of a specific day.
+> This bot is used to display the events of the day, the next day or the week for a class. It can also display the events of a specific day and send every day a message with the events of the next day at a specific time.
 
 ## 🧾 Table of Contents
 1. [🔧 Setup](#-setup)
@@ -37,12 +37,16 @@ TOKEN=""
 CHANNEL_ID_1A=""
 CHANNEL_ID_2A_RIO=""
 CHANNEL_ID_2A_SDIA=""
+
+# Hour of the day when the bot will send the daily message (24h format):
+HOUR=
+MINUTE=
 ```
 
 ## 🚀 Launch
-To launch the bot, you need to run the `calendar-bot.py` file :
+To launch the bot, you need to run the `main.py` file :
 ```bash
-python3 calendar-bot.py
+python3 main.py
 ```
 
 ## 📝 Commands
@@ -54,7 +58,9 @@ The bot use the slash commands to interact with the user.
 | `/week <classe>`             | Show the events of the week for the class mentioned |
 | `/day <YYYY-MM-DD> <classe>` | Show the events of a day for the class mentioned    |
 
-In adition, the bot send a message at startup in the channels for each class concerning the events of the next day.
+In adition, the bot send a message at startup in the channels for each class concerning the events of the next day at the time specified in the `.env` file.
 
 ## 🐞 Bugs and TODO
-- [ ] Create auto post every morning using something else than restart the bot with cron
+- [ ] Add test for the bot
+- [ ] Make code cleaner and more compact
+- [ ] Add logs
