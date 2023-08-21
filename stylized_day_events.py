@@ -12,6 +12,8 @@ load_dotenv()
 c1 = Calendar(requests.get(env["URL_1A"]).text)
 c2 = Calendar(requests.get(env["URL_2A_RIO"]).text)
 c3 = Calendar(requests.get(env["URL_2A_SDIA"]).text)
+c4 = Calendar(requests.get(env["URL_3A_RIO"]).text)
+c5 = Calendar(requests.get(env["URL_3A_SDIA"]).text)
 
 
 def day_events(days, classe):
@@ -24,6 +26,12 @@ def day_events(days, classe):
         c = c2
     elif classe == "2ASDIA":
         c = c3
+    elif classe == "3ARIO":
+        c = c4
+    elif classe == "3ASDIA":
+        c = c5
+    else:
+        return
 
     today_lst = []
 
