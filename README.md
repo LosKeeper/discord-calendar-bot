@@ -29,6 +29,8 @@ To configure the bot, you need to create configuration file name `.env` (you can
 URL_1A=""
 URL_2A_RIO=""
 URL_2A_SDIA=""
+URL_3A_RIO=""
+URL_3A_SDIA=""
 
 # Token of the bot :
 TOKEN=""
@@ -37,6 +39,8 @@ TOKEN=""
 CHANNEL_ID_1A=""
 CHANNEL_ID_2A_RIO=""
 CHANNEL_ID_2A_SDIA=""
+CHANNEL_ID_3A_RIO=""
+CHANNEL_ID_3A_SDIA=""
 
 # Hour of the day when the bot will send the daily message (24h format):
 HOUR=
