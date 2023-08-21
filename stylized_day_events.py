@@ -9,11 +9,32 @@ from ics import Calendar
 import requests
 
 load_dotenv()
-c1 = Calendar(requests.get(env["URL_1A"]).text)
-c2 = Calendar(requests.get(env["URL_2A_RIO"]).text)
-c3 = Calendar(requests.get(env["URL_2A_SDIA"]).text)
-c4 = Calendar(requests.get(env["URL_3A_RIO"]).text)
-c5 = Calendar(requests.get(env["URL_3A_SDIA"]).text)
+
+# Check if env vars are set one by one and if not, set them to None
+if env["URL_1A"] == "":
+    c1 = None
+else:
+    c1 = Calendar(requests.get(env["URL_1A"]).text)
+
+if env["URL_2A_RIO"] == "":
+    c2 = None
+else:
+    c2 = Calendar(requests.get(env["URL_2A_RIO"]).text)
+
+if env["URL_2A_SDIA"] == "":
+    c3 = None
+else:
+    c3 = Calendar(requests.get(env["URL_2A_SDIA"]).text)
+
+if env["URL_3A_RIO"] == "":
+    c4 = None
+else:
+    c4 = Calendar(requests.get(env["URL_3A_RIO"]).text)
+
+if env["URL_3A_SDIA"] == "":
+    c5 = None
+else:
+    c5 = Calendar(requests.get(env["URL_3A_SDIA"]).text)
 
 
 def day_events(days, classe):
@@ -32,6 +53,10 @@ def day_events(days, classe):
         c = c5
     else:
         return
+
+    # If no calendar is set for this class
+    if c is None:
+        return "```fix\nPas d'emploi du temps configuré pour cette classe\n```"
 
     today_lst = []
 
