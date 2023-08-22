@@ -136,6 +136,11 @@ async def _day(ctx: interactions.SlashContext, date: str, classe: str):
 
 @interactions.Task.create(interactions.TimeTrigger(hour=int(env["HOUR"]), minute=int(env["MINUTE"]), utc=False))
 async def _daily_calendar():
+
+    # Don't print calendar for the week-end so don't print it if it's friday or saturday
+    if datetime.now().weekday() in [4, 5]:
+        return
+
     # 1A
     channel = await bot.fetch_channel(env["CHANNEL_ID_1A"])
     await channel.purge(deletion_limit=10)
